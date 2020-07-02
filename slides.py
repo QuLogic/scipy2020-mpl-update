@@ -72,12 +72,10 @@ def create_icon_axes(fig, ax_position, lw_bars, lw_grid, lw_border, rgrid):
 
 def create_text_axes(fig, height_px):
     """Create an axes in *fig* that contains 'matplotlib' as Text."""
-    ax = fig.add_axes((0, 0, 1, 1))
+    ax = fig.add_axes((0, 0.5, 1, 0.5))
     ax.set_aspect("equal")
     ax.set_axis_off()
 
-    font = matplotlib.font_manager.FontProperties(family='Carlito',
-                                                  weight='bold')
     path = TextPath((0, 0), "matplotlib", size=height_px * 0.8, prop=font)
 
     angle = 4.25  # degrees
@@ -90,21 +88,22 @@ def create_text_axes(fig, height_px):
 
 
 def title(pdf):
-    if 'Carlito' not in matplotlib.font_manager.findfont('Carlito:bold'):
-        sys.exit('Carlito font must be installed.')
-
-    dpi = 100
-    height = 110 / dpi
-    figsize = (5 * height, height)
-    fig = plt.figure(figsize=figsize, dpi=dpi)
-    fig.patch.set_alpha(0)
+    fig = plt.figure(figsize=(19.2, 10.8), dpi=100)
 
     create_text_axes(fig, 110)
-    ax_pos = (0.535, 0.12, .17, 0.75)
-    create_icon_axes(fig, ax_pos, 0.7, 0.5, 1, [1, 3, 5, 7])
+    ax_pos = (0.535, 0.62, 0.17, 0.28)
+    create_icon_axes(fig, ax_pos, 1.4, 1, 2, [1, 3, 5, 7])
+
+    fig.text(0.5, 0.4, 'SciPy 2020',
+             fontproperties=font, color='C0', fontsize=72)
+    fig.text(0.5, 0.3, '@matplotlib',
+             fontproperties=font, color='C0', fontsize=72)
 
     pdf.savefig(fig)
 
 
+if 'Carlito' not in matplotlib.font_manager.findfont('Carlito:bold'):
+    sys.exit('Carlito font must be installed.')
+font = matplotlib.font_manager.FontProperties(family='Carlito', weight='bold')
 with PdfPages('slides.pdf') as pdf:
     title(pdf)

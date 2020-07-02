@@ -75,7 +75,7 @@ def create_icon_axes(fig, ax_position, lw_bars, lw_grid, lw_border, rgrid):
 
 def create_text_axes(fig, height_px):
     """Create an axes in *fig* that contains 'matplotlib' as Text."""
-    ax = fig.add_axes((0, 0.5, 1, 0.5))
+    ax = fig.add_axes((0, 0.4, 1, 0.5))
     ax.set_aspect("equal")
     ax.set_axis_off()
 
@@ -94,12 +94,12 @@ def title(pdf):
     fig = plt.figure(figsize=(19.2, 10.8), dpi=100)
 
     create_text_axes(fig, 110)
-    ax_pos = (0.535, 0.62, 0.17, 0.28)
+    ax_pos = (0.535, 0.52, 0.17, 0.28)
     create_icon_axes(fig, ax_pos, 1.4, 1, 2, [1, 3, 5, 7])
 
-    fig.text(0.5, 0.4, 'SciPy 2020',
+    fig.text(0.5, 0.3, 'SciPy 2020',
              fontproperties=font, color='C0', fontsize=72)
-    fig.text(0.5, 0.3, '@matplotlib',
+    fig.text(0.5, 0.2, '@matplotlib',
              fontproperties=font, color='C0', fontsize=72)
 
     pdf.savefig(fig)
@@ -108,7 +108,7 @@ def title(pdf):
 def history(pdf, mpl_path):
     fig = plt.figure(figsize=(19.2, 10.8), dpi=100)
 
-    fig.text(0.05, 0.8, 'Release History',
+    fig.text(0.05, 0.85, 'Release History',
              fontproperties=font, color='C0', fontsize=72)
 
     tags = subprocess.run(['git', 'tag', '-l',
@@ -163,10 +163,10 @@ def history(pdf, mpl_path):
 def feature32_overview(pdf):
     fig = plt.figure(figsize=(19.2, 10.8), dpi=100)
 
-    fig.text(0.05, 0.8, '3.2 Feature Highlights',
+    fig.text(0.05, 0.85, '3.2 Feature Highlights',
              fontproperties=font, color='C0', fontsize=72)
 
-    fig.text(0.05, 0.75, '''\
+    fig.text(0.05, 0.8, '''\
 \N{Bullet} Unit converters recognize subclasses
 \N{Bullet} $pyplot.imsave$ accepts metadata and PIL options
 \N{Bullet} $FontProperties$ accepts $os.PathLike$
@@ -201,7 +201,7 @@ def feature32_overview(pdf):
 def feature33_mosaic(pdf):
     fig = plt.figure(figsize=(19.2, 10.8), dpi=100)
 
-    fig.text(0.05, 0.8, '3.3 Feature Highlight - Mosaic',
+    fig.text(0.05, 0.85, '3.3 Feature Highlight - Mosaic',
              fontproperties=font, color='C0', fontsize=72)
 
     pdf.savefig(fig)
@@ -210,7 +210,7 @@ def feature33_mosaic(pdf):
 def feature33_2(pdf):
     fig = plt.figure(figsize=(19.2, 10.8), dpi=100)
 
-    fig.text(0.05, 0.8, '3.3 Feature Highlight - 2',
+    fig.text(0.05, 0.85, '3.3 Feature Highlight - 2',
              fontproperties=font, color='C0', fontsize=72)
 
     pdf.savefig(fig)
@@ -219,7 +219,7 @@ def feature33_2(pdf):
 def release_plan(pdf):
     fig = plt.figure(figsize=(19.2, 10.8), dpi=100)
 
-    fig.text(0.05, 0.8, 'Release Plan',
+    fig.text(0.05, 0.85, 'Release Plan',
              fontproperties=font, color='C0', fontsize=72)
 
     fig.text(0.05, 0.6, 'Next feature release: 3.4',

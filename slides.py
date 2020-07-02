@@ -177,9 +177,49 @@ def history(pdf):
     pdf.savefig(fig)
 
 
+def feature32_overview(pdf):
+    fig = plt.figure(figsize=(19.2, 10.8), dpi=100)
+
+    fig.text(0.05, 0.8, '3.2 Feature Highlights',
+             fontproperties=font, color='C0', fontsize=72)
+
+    pdf.savefig(fig)
+
+
+def feature33_mosaic(pdf):
+    fig = plt.figure(figsize=(19.2, 10.8), dpi=100)
+
+    fig.text(0.05, 0.8, '3.3 Feature Highlight - Mosaic',
+             fontproperties=font, color='C0', fontsize=72)
+
+    pdf.savefig(fig)
+
+
+def feature33_2(pdf):
+    fig = plt.figure(figsize=(19.2, 10.8), dpi=100)
+
+    fig.text(0.05, 0.8, '3.3 Feature Highlight - 2',
+             fontproperties=font, color='C0', fontsize=72)
+
+    pdf.savefig(fig)
+
+
+def release_plan(pdf):
+    fig = plt.figure(figsize=(19.2, 10.8), dpi=100)
+
+    fig.text(0.05, 0.8, 'Release Plan',
+             fontproperties=font, color='C0', fontsize=72)
+
+    pdf.savefig(fig)
+
+
 if 'Carlito' not in matplotlib.font_manager.findfont('Carlito:bold'):
     sys.exit('Carlito font must be installed.')
 font = matplotlib.font_manager.FontProperties(family='Carlito', weight='bold')
 with PdfPages('slides.pdf') as pdf:
     title(pdf)
     history(pdf)
+    feature32_overview(pdf)
+    feature33_mosaic(pdf)
+    feature33_2(pdf)
+    release_plan(pdf)

@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
 
 from datetime import datetime
-import json
+import subprocess
 import sys
-import urllib.request
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -106,44 +105,22 @@ def title(pdf):
     pdf.savefig(fig)
 
 
-def history(pdf):
+def history(pdf, mpl_path):
     fig = plt.figure(figsize=(19.2, 10.8), dpi=100)
 
     fig.text(0.05, 0.8, 'Release History',
              fontproperties=font, color='C0', fontsize=72)
 
-    try:
-        url = 'https://api.github.com/repos/matplotlib/matplotlib/releases'
-        url += '?per_page=100'
-        data = json.loads(
-            urllib.request.urlopen(url, timeout=.4).read().decode())
-
-        dates = []
-        names = []
-        for item in data:
-            if 'rc' not in item['tag_name'] and 'b' not in item['tag_name']:
-                dates.append(item['published_at'].split("T")[0])
-                names.append(item['tag_name'])
-        # Convert date strings (e.g. 2014-10-18) to datetime
-        dates = [datetime.strptime(d, "%Y-%m-%d") for d in dates]
-
-    except Exception:
-        # In case the above fails, e.g. because of missing internet connection
-        # use the following lists as fallback.
-        names = ['v2.2.4', 'v3.0.3', 'v3.0.2', 'v3.0.1', 'v3.0.0', 'v2.2.3',
-                 'v2.2.2', 'v2.2.1', 'v2.2.0', 'v2.1.2', 'v2.1.1', 'v2.1.0',
-                 'v2.0.2', 'v2.0.1', 'v2.0.0', 'v1.5.3', 'v1.5.2', 'v1.5.1',
-                 'v1.5.0', 'v1.4.3', 'v1.4.2', 'v1.4.1', 'v1.4.0']
-
-        dates = ['2019-02-26', '2019-02-26', '2018-11-10', '2018-11-10',
-                 '2018-09-18', '2018-08-10', '2018-03-17', '2018-03-16',
-                 '2018-03-06', '2018-01-18', '2017-12-10', '2017-10-07',
-                 '2017-05-10', '2017-05-02', '2017-01-17', '2016-09-09',
-                 '2016-07-03', '2016-01-10', '2015-10-29', '2015-02-16',
-                 '2014-10-26', '2014-10-18', '2014-08-26']
-
-        # Convert date strings (e.g. 2014-10-18) to datetime
-        dates = [datetime.strptime(d, "%Y-%m-%d") for d in dates]
+    tags = subprocess.run(['git', 'tag', '-l',
+                           '--format=%(refname:strip=2) %(creatordate:short)'],
+                          cwd=mpl_path, capture_output=True, text=True)
+    dates = []
+    names = []
+    for item in tags.stdout.splitlines():
+        tag_name, date = item.split(' ', 1)
+        if 'rc' not in tag_name and 'b' not in tag_name:
+            dates.append(datetime.fromisoformat(date))
+            names.append(tag_name)
 
     levels = np.tile([-5, 5, -3, 3, -1, 1],
                      int(np.ceil(len(dates) / 6)))[:len(dates)]
@@ -173,6 +150,12 @@ def history(pdf):
         ax.spines[spine].set_visible(False)
 
     ax.margins(y=0.1)
+
+    # Annotate range between SciPy 2019 and SciPy 2020.
+    ax.axvspan(datetime(2019, 7, 8), datetime(2020, 7, 6), alpha=0.5)
+
+    # Only plot the last 5 years before SciPy 2020.
+    ax.set_xlim(datetime(2015, 7, 6), datetime(2020, 7, 6))
 
     pdf.savefig(fig)
 
@@ -249,12 +232,16 @@ def release_plan(pdf):
     pdf.savefig(fig)
 
 
+if len(sys.argv) < 2:
+    sys.exit('Usage: %s <matplotlib-path>' % (sys.argv[0], ))
+mpl_path = sys.argv[1]
+
 if 'Carlito' not in matplotlib.font_manager.findfont('Carlito:bold'):
     sys.exit('Carlito font must be installed.')
 font = matplotlib.font_manager.FontProperties(family='Carlito', weight='bold')
 with PdfPages('slides.pdf') as pdf:
     title(pdf)
-    history(pdf)
+    history(pdf, mpl_path)
     feature32_overview(pdf)
     feature33_mosaic(pdf)
     feature33_2(pdf)

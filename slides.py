@@ -150,21 +150,22 @@ def history(pdf):
 
     ax = fig.add_axes((0.05, 0.11, 0.9, 0.7))
 
-    ax.vlines(dates, 0, levels, color="tab:red")
+    ax.vlines(dates, 0, levels, color="tab:red", linewidth=3)
     ax.plot(dates, np.zeros_like(dates), "-o",
-            color="k", markerfacecolor="w")
+            color="k", markerfacecolor="w", linewidth=3, markersize=10)
 
     # annotate lines
     for d, l, r in zip(dates, levels, names):
         ax.annotate(r, xy=(d, l),
                     xytext=(-3, np.sign(l)*3), textcoords="offset points",
                     horizontalalignment="right",
-                    verticalalignment="bottom" if l > 0 else "top")
+                    verticalalignment="bottom" if l > 0 else "top",
+                    fontsize=24)
 
     # format xaxis with 4 month intervals
     ax.get_xaxis().set_major_locator(mdates.MonthLocator(interval=4))
     ax.get_xaxis().set_major_formatter(mdates.DateFormatter("%b %Y"))
-    plt.setp(ax.get_xticklabels(), rotation=30, ha="right")
+    plt.setp(ax.get_xticklabels(), rotation=30, ha="right", fontsize=24)
 
     # remove y axis and spines
     ax.get_yaxis().set_visible(False)

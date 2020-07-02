@@ -183,6 +183,35 @@ def feature32_overview(pdf):
     fig.text(0.05, 0.8, '3.2 Feature Highlights',
              fontproperties=font, color='C0', fontsize=72)
 
+    fig.text(0.05, 0.75, '''\
+\N{Bullet} Unit converters recognize subclasses
+\N{Bullet} $pyplot.imsave$ accepts metadata and PIL options
+\N{Bullet} $FontProperties$ accepts $os.PathLike$
+\N{Bullet} bar3d lightsource shading
+\N{Bullet} Gouraud-shading alpha channel in PDF backend
+\N{Bullet} Improvements in Logit scale ticker and formatter
+\N{Bullet} rcParams for axes title location and color
+\N{Bullet} 3-digit and 4-digit hex colors
+\N{Bullet} Added support for RGB(A) images in pcolorfast
+\N{Bullet} Shifting errorbars''',
+             fontproperties=font, alpha=0.7, fontsize=48,
+             verticalalignment='top')
+    """
+    import matplotlib.pyplot as plt
+
+    # Use old kerning values:
+    plt.rcParams['text.kerning_factor'] = 6
+    fig, ax = plt.subplots()
+    ax.text(0.0, 0.05, 'BRAVO\nAWKWARD\nVAT\nW.Test', fontsize=56)
+    ax.set_title('Before (text.kerning_factor = 6)')
+    """
+
+    # Use new kerning values:
+    # plt.rcParams['text.kerning_factor'] = 0
+    # fig, ax = plt.subplots()
+    # ax.text(0.0, 0.05, 'BRAVO\nAWKWARD\nVAT\nW.Test', fontsize=56)
+    # ax.set_title('After (text.kerning_factor = 0)')
+
     pdf.savefig(fig)
 
 
@@ -209,6 +238,13 @@ def release_plan(pdf):
 
     fig.text(0.05, 0.8, 'Release Plan',
              fontproperties=font, color='C0', fontsize=72)
+
+    fig.text(0.05, 0.6, 'Next feature release: 3.4',
+             fontproperties=font, alpha=0.7, fontsize=56)
+    fig.text(0.1, 0.5, '\N{Bullet} September 2020',
+             fontproperties=font, alpha=0.7, fontsize=56)
+    fig.text(0.1, 0.4, '\N{Bullet} Dropping Python 3.6 support',
+             fontproperties=font, alpha=0.7, fontsize=56)
 
     pdf.savefig(fig)
 

@@ -9,14 +9,14 @@ import matplotlib.pyplot as plt
 from matplotlib.backends.backend_pdf import PdfPages
 import matplotlib.cm as cm
 import matplotlib.dates as mdates
-import matplotlib.font_manager
 from matplotlib.patches import Rectangle, PathPatch
 from matplotlib.textpath import TextPath
 import matplotlib.transforms as mtrans
 
+from mplslide import check_requirements
+check_requirements()  # noqa: F402
 
-MPL_BLUE = '#11557c'
-BULLET = '$\N{Bullet}$'
+from mplslide import MPL_BLUE, BULLET, FONT
 
 
 def create_icon_axes(fig, ax_position, lw_bars, lw_grid, lw_border, rgrid):
@@ -80,7 +80,7 @@ def create_text_axes(fig, height_px):
     ax.set_aspect("equal")
     ax.set_axis_off()
 
-    path = TextPath((0, 0), "matplotlib", size=height_px * 0.8, prop=font)
+    path = TextPath((0, 0), "matplotlib", size=height_px * 0.8, prop=FONT)
 
     angle = 4.25  # degrees
     trans = mtrans.Affine2D().skew_deg(angle, 0)
@@ -99,9 +99,9 @@ def title():
     create_icon_axes(fig, ax_pos, 1.4, 1, 2, [1, 3, 5, 7])
 
     fig.text(0.5, 0.3, 'SciPy 2020',
-             fontproperties=font, color='C0', fontsize=72)
+             fontproperties=FONT, color='C0', fontsize=72)
     fig.text(0.5, 0.2, '@matplotlib',
-             fontproperties=font, color='C0', fontsize=72)
+             fontproperties=FONT, color='C0', fontsize=72)
 
     return fig
 
@@ -110,7 +110,7 @@ def history(mpl_path):
     fig = plt.figure(figsize=(19.2, 10.8), dpi=100)
 
     fig.text(0.05, 0.85, 'Release History',
-             fontproperties=font, color='C0', fontsize=72)
+             fontproperties=FONT, color='C0', fontsize=72)
 
     tags = subprocess.run(['git', 'tag', '-l',
                            '--format=%(refname:strip=2) %(creatordate:short)'],
@@ -165,7 +165,7 @@ def feature32_overview():
     fig = plt.figure(figsize=(19.2, 10.8), dpi=100)
 
     fig.text(0.05, 0.85, '3.2 Feature Highlights',
-             fontproperties=font, color='C0', fontsize=72)
+             fontproperties=FONT, color='C0', fontsize=72)
 
     fig.text(0.05, 0.8, f'''\
 {BULLET} Unit converters recognize subclasses
@@ -178,7 +178,7 @@ def feature32_overview():
 {BULLET} 3-digit and 4-digit hex colors
 {BULLET} Added support for RGB(A) images in pcolorfast
 {BULLET} Shifting errorbars''',
-             fontproperties=font, alpha=0.7, fontsize=48,
+             fontproperties=FONT, alpha=0.7, fontsize=48,
              verticalalignment='top')
     """
     import matplotlib.pyplot as plt
@@ -203,7 +203,7 @@ def feature33_mosaic():
     fig = plt.figure(figsize=(19.2, 10.8), dpi=100)
 
     fig.text(0.05, 0.85, '3.3 Feature Highlight - Mosaic',
-             fontproperties=font, color='C0', fontsize=72)
+             fontproperties=FONT, color='C0', fontsize=72)
 
     return fig
 
@@ -212,7 +212,7 @@ def feature33_2():
     fig = plt.figure(figsize=(19.2, 10.8), dpi=100)
 
     fig.text(0.05, 0.85, '3.3 Feature Highlight - 2',
-             fontproperties=font, color='C0', fontsize=72)
+             fontproperties=FONT, color='C0', fontsize=72)
 
     return fig
 
@@ -221,29 +221,22 @@ def release_plan():
     fig = plt.figure(figsize=(19.2, 10.8), dpi=100)
 
     fig.text(0.05, 0.85, 'Release Plan',
-             fontproperties=font, color='C0', fontsize=72)
+             fontproperties=FONT, color='C0', fontsize=72)
 
     fig.text(0.05, 0.6, 'Next feature release: 3.4',
-             fontproperties=font, alpha=0.7, fontsize=56)
+             fontproperties=FONT, alpha=0.7, fontsize=56)
     fig.text(0.1, 0.5, f'{BULLET} September 2020',
-             fontproperties=font, alpha=0.7, fontsize=56)
+             fontproperties=FONT, alpha=0.7, fontsize=56)
     fig.text(0.1, 0.4, f'{BULLET} Dropping Python 3.6 support',
-             fontproperties=font, alpha=0.7, fontsize=56)
+             fontproperties=FONT, alpha=0.7, fontsize=56)
 
     return fig
 
 
-if len(sys.argv) < 2:
-    sys.exit('Usage: %s <matplotlib-path>' % (sys.argv[0], ))
-mpl_path = sys.argv[1]
-
-if 'Carlito' not in matplotlib.font_manager.findfont('Carlito:bold'):
-    sys.exit('Carlito font must be installed.')
-font = matplotlib.font_manager.FontProperties(family='Carlito', weight='bold')
-
+MPL_PATH = sys.argv[1]
 PAGES = [
     (title, ),
-    (history, mpl_path, ),
+    (history, MPL_PATH, ),
     (feature32_overview, ),
     (feature33_mosaic, ),
     (feature33_2, ),

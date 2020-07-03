@@ -16,6 +16,7 @@ import matplotlib.transforms as mtrans
 
 
 MPL_BLUE = '#11557c'
+BULLET = '$\N{Bullet}$'
 
 
 def create_icon_axes(fig, ax_position, lw_bars, lw_grid, lw_border, rgrid):
@@ -166,17 +167,17 @@ def feature32_overview(pdf):
     fig.text(0.05, 0.85, '3.2 Feature Highlights',
              fontproperties=font, color='C0', fontsize=72)
 
-    fig.text(0.05, 0.8, '''\
-\N{Bullet} Unit converters recognize subclasses
-\N{Bullet} $pyplot.imsave$ accepts metadata and PIL options
-\N{Bullet} $FontProperties$ accepts $os.PathLike$
-\N{Bullet} bar3d lightsource shading
-\N{Bullet} Gouraud-shading alpha channel in PDF backend
-\N{Bullet} Improvements in Logit scale ticker and formatter
-\N{Bullet} rcParams for axes title location and color
-\N{Bullet} 3-digit and 4-digit hex colors
-\N{Bullet} Added support for RGB(A) images in pcolorfast
-\N{Bullet} Shifting errorbars''',
+    fig.text(0.05, 0.8, f'''\
+{BULLET} Unit converters recognize subclasses
+{BULLET} $pyplot.imsave$ accepts metadata and PIL options
+{BULLET} $FontProperties$ accepts $os.PathLike$
+{BULLET} bar3d lightsource shading
+{BULLET} Gouraud-shading alpha channel in PDF backend
+{BULLET} Improvements in Logit scale ticker and formatter
+{BULLET} rcParams for axes title location and color
+{BULLET} 3-digit and 4-digit hex colors
+{BULLET} Added support for RGB(A) images in pcolorfast
+{BULLET} Shifting errorbars''',
              fontproperties=font, alpha=0.7, fontsize=48,
              verticalalignment='top')
     """
@@ -224,9 +225,9 @@ def release_plan(pdf):
 
     fig.text(0.05, 0.6, 'Next feature release: 3.4',
              fontproperties=font, alpha=0.7, fontsize=56)
-    fig.text(0.1, 0.5, '\N{Bullet} September 2020',
+    fig.text(0.1, 0.5, f'{BULLET} September 2020',
              fontproperties=font, alpha=0.7, fontsize=56)
-    fig.text(0.1, 0.4, '\N{Bullet} Dropping Python 3.6 support',
+    fig.text(0.1, 0.4, f'{BULLET} Dropping Python 3.6 support',
              fontproperties=font, alpha=0.7, fontsize=56)
 
     pdf.savefig(fig)

@@ -1,39 +1,36 @@
-from mplslide import BULLET, FONT, new_slide, slide_heading
+import matplotlib.pyplot as plt
+import matplotlib.colors as mcolors
+import numpy as np
+
+from mplslide import new_slide, slide_heading
 
 
 def feature32_overview():
     fig = new_slide()
 
-    slide_heading(fig, '3.2 Feature Highlights')
+    slide_heading(fig, '3.2 Feature: bar3d light source')
 
-    fig.text(0.05, 0.8, f'''\
-{BULLET} Unit converters recognize subclasses
-{BULLET} $pyplot.imsave$ accepts metadata and PIL options
-{BULLET} $FontProperties$ accepts $os.PathLike$
-{BULLET} bar3d lightsource shading
-{BULLET} Gouraud-shading alpha channel in PDF backend
-{BULLET} Improvements in Logit scale ticker and formatter
-{BULLET} rcParams for axes title location and color
-{BULLET} 3-digit and 4-digit hex colors
-{BULLET} Added support for RGB(A) images in pcolorfast
-{BULLET} Shifting errorbars''',
-             fontproperties=FONT, alpha=0.7, fontsize=48,
-             verticalalignment='top')
-    """
-    import matplotlib.pyplot as plt
+    for i, angle in [(1, 90), (2, 0)]:
+        ax = fig.add_subplot(1, 2, i, projection="3d")
 
-    # Use old kerning values:
-    plt.rcParams['text.kerning_factor'] = 6
-    fig, ax = plt.subplots()
-    ax.text(0.0, 0.05, 'BRAVO\nAWKWARD\nVAT\nW.Test', fontsize=56)
-    ax.set_title('Before (text.kerning_factor = 6)')
-    """
+        ls = mcolors.LightSource(azdeg=45, altdeg=angle)
+        cmap = plt.get_cmap("coolwarm")
 
-    # Use new kerning values:
-    # plt.rcParams['text.kerning_factor'] = 0
-    # fig, ax = plt.subplots()
-    # ax.text(0.0, 0.05, 'BRAVO\nAWKWARD\nVAT\nW.Test', fontsize=56)
-    # ax.set_title('After (text.kerning_factor = 0)')
+        length, width = 3, 4
+        area = length * width
+
+        norm = mcolors.Normalize(0, area-1)
+
+        x, y = np.meshgrid(np.arange(length), np.arange(width))
+        x = x.ravel()
+        y = y.ravel()
+        dz = x + y
+
+        color = np.array([cmap(norm(i)) for i in range(area)])
+
+        ax.bar3d(x=x, y=y, z=0,
+                 dx=1, dy=1, dz=dz,
+                 color=color, shade=True, lightsource=ls)
 
     return fig
 

@@ -1,13 +1,10 @@
-import matplotlib.pyplot as plt
-
-from mplslide import BULLET, FONT
+from mplslide import BULLET, FONT, new_slide, slide_heading
 
 
 def feature32_overview():
-    fig = plt.figure(figsize=(19.2, 10.8), dpi=100)
+    fig = new_slide()
 
-    fig.text(0.05, 0.85, '3.2 Feature Highlights',
-             fontproperties=FONT, color='C0', fontsize=72)
+    slide_heading(fig, '3.2 Feature Highlights')
 
     fig.text(0.05, 0.8, f'''\
 {BULLET} Unit converters recognize subclasses

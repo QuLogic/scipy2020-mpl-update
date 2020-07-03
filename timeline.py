@@ -5,14 +5,13 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 
-from mplslide import FONT
+from mplslide import new_slide, slide_heading
 
 
 def slides(mpl_path):
-    fig = plt.figure(figsize=(19.2, 10.8), dpi=100)
+    fig = new_slide()
 
-    fig.text(0.05, 0.85, 'Release History',
-             fontproperties=FONT, color='C0', fontsize=72)
+    slide_heading(fig, 'Release History')
 
     tags = subprocess.run(['git', 'tag', '-l',
                            '--format=%(refname:strip=2) %(creatordate:short)'],

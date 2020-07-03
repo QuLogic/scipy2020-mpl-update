@@ -24,12 +24,12 @@ PAGES = [
 ]
 
 with PdfPages('slides.pdf') as pdf:
-    for i, (page, *args) in enumerate(PAGES):
+    for page, *args in PAGES:
         figs = page(*args)
         if not isinstance(figs, (tuple, list)):
             figs = (figs, )
         for fig in figs:
-            if i != 0:
+            if not fig.mplslide_props['plain']:
                 create_icon_axes(fig, (0.825, 0.825, 0.2, 0.15),
                                  0.3, 0.3, 0.3, [5])
             pdf.savefig(fig)

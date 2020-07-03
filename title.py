@@ -6,7 +6,7 @@ from matplotlib.textpath import TextPath
 import matplotlib.transforms as mtrans
 
 
-from mplslide import MPL_BLUE, FONT
+from mplslide import MPL_BLUE, FONT, new_slide
 
 
 def create_icon_axes(fig, ax_position, lw_bars, lw_grid, lw_border, rgrid):
@@ -82,7 +82,7 @@ def create_text_axes(fig, height_px):
 
 
 def slides():
-    fig = plt.figure(figsize=(19.2, 10.8), dpi=100)
+    fig = new_slide(plain=True)
 
     create_text_axes(fig, 110)
     ax_pos = (0.535, 0.52, 0.17, 0.28)

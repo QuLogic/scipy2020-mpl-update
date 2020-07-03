@@ -91,7 +91,7 @@ def create_text_axes(fig, height_px):
     ax.autoscale()
 
 
-def title(pdf):
+def title():
     fig = plt.figure(figsize=(19.2, 10.8), dpi=100)
 
     create_text_axes(fig, 110)
@@ -103,10 +103,10 @@ def title(pdf):
     fig.text(0.5, 0.2, '@matplotlib',
              fontproperties=font, color='C0', fontsize=72)
 
-    pdf.savefig(fig)
+    return fig
 
 
-def history(pdf, mpl_path):
+def history(mpl_path):
     fig = plt.figure(figsize=(19.2, 10.8), dpi=100)
 
     fig.text(0.05, 0.85, 'Release History',
@@ -158,10 +158,10 @@ def history(pdf, mpl_path):
     # Only plot the last 5 years before SciPy 2020.
     ax.set_xlim(datetime(2015, 7, 6), datetime(2020, 7, 6))
 
-    pdf.savefig(fig)
+    return fig
 
 
-def feature32_overview(pdf):
+def feature32_overview():
     fig = plt.figure(figsize=(19.2, 10.8), dpi=100)
 
     fig.text(0.05, 0.85, '3.2 Feature Highlights',
@@ -196,28 +196,28 @@ def feature32_overview(pdf):
     # ax.text(0.0, 0.05, 'BRAVO\nAWKWARD\nVAT\nW.Test', fontsize=56)
     # ax.set_title('After (text.kerning_factor = 0)')
 
-    pdf.savefig(fig)
+    return fig
 
 
-def feature33_mosaic(pdf):
+def feature33_mosaic():
     fig = plt.figure(figsize=(19.2, 10.8), dpi=100)
 
     fig.text(0.05, 0.85, '3.3 Feature Highlight - Mosaic',
              fontproperties=font, color='C0', fontsize=72)
 
-    pdf.savefig(fig)
+    return fig
 
 
-def feature33_2(pdf):
+def feature33_2():
     fig = plt.figure(figsize=(19.2, 10.8), dpi=100)
 
     fig.text(0.05, 0.85, '3.3 Feature Highlight - 2',
              fontproperties=font, color='C0', fontsize=72)
 
-    pdf.savefig(fig)
+    return fig
 
 
-def release_plan(pdf):
+def release_plan():
     fig = plt.figure(figsize=(19.2, 10.8), dpi=100)
 
     fig.text(0.05, 0.85, 'Release Plan',
@@ -230,7 +230,7 @@ def release_plan(pdf):
     fig.text(0.1, 0.4, f'{BULLET} Dropping Python 3.6 support',
              fontproperties=font, alpha=0.7, fontsize=56)
 
-    pdf.savefig(fig)
+    return fig
 
 
 if len(sys.argv) < 2:
@@ -240,10 +240,23 @@ mpl_path = sys.argv[1]
 if 'Carlito' not in matplotlib.font_manager.findfont('Carlito:bold'):
     sys.exit('Carlito font must be installed.')
 font = matplotlib.font_manager.FontProperties(family='Carlito', weight='bold')
+
+PAGES = [
+    (title, ),
+    (history, mpl_path, ),
+    (feature32_overview, ),
+    (feature33_mosaic, ),
+    (feature33_2, ),
+    (release_plan, ),
+]
+
 with PdfPages('slides.pdf') as pdf:
-    title(pdf)
-    history(pdf, mpl_path)
-    feature32_overview(pdf)
-    feature33_mosaic(pdf)
-    feature33_2(pdf)
-    release_plan(pdf)
+    for i, (page, *args) in enumerate(PAGES):
+        figs = page(*args)
+        if not isinstance(figs, (tuple, list)):
+            figs = (figs, )
+        for fig in figs:
+            if i != 0:
+                create_icon_axes(fig, (0.825, 0.825, 0.2, 0.15),
+                                 0.3, 0.3, 0.3, [5])
+            pdf.savefig(fig)

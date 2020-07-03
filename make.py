@@ -2,33 +2,16 @@
 
 import sys
 
-import matplotlib.pyplot as plt
 from matplotlib.backends.backend_pdf import PdfPages
 
 from mplslide import check_requirements
 check_requirements()  # noqa: F402
 
-from mplslide import BULLET, FONT
 from title import create_icon_axes, slides as title_slides
 from timeline import slides as history_slides
 from feature32 import slides as feature32_slides
 from feature33 import slides as feature33_slides
-
-
-def release_plan():
-    fig = plt.figure(figsize=(19.2, 10.8), dpi=100)
-
-    fig.text(0.05, 0.85, 'Release Plan',
-             fontproperties=FONT, color='C0', fontsize=72)
-
-    fig.text(0.05, 0.6, 'Next feature release: 3.4',
-             fontproperties=FONT, alpha=0.7, fontsize=56)
-    fig.text(0.1, 0.5, f'{BULLET} September 2020',
-             fontproperties=FONT, alpha=0.7, fontsize=56)
-    fig.text(0.1, 0.4, f'{BULLET} Dropping Python 3.6 support',
-             fontproperties=FONT, alpha=0.7, fontsize=56)
-
-    return fig
+from plan import slides as plan_slides
 
 
 MPL_PATH = sys.argv[1]
@@ -37,7 +20,7 @@ PAGES = [
     (history_slides, MPL_PATH, ),
     (feature32_slides, ),
     (feature33_slides, ),
-    (release_plan, ),
+    (plan_slides, ),
 ]
 
 with PdfPages('slides.pdf') as pdf:

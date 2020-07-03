@@ -8,6 +8,7 @@ from mplslide import check_requirements
 check_requirements()  # noqa: F402
 
 from title import create_icon_axes, slides as title_slides
+from news import slides as news_slides
 from timeline import slides as history_slides
 from feature32 import slides as feature32_slides
 from feature33 import slides as feature33_slides
@@ -17,6 +18,7 @@ from plan import slides as plan_slides
 MPL_PATH = sys.argv[1]
 PAGES = [
     (title_slides, ),
+    (news_slides, ),
     (history_slides, MPL_PATH, ),
     (feature32_slides, ),
     (feature33_slides, ),

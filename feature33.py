@@ -7,6 +7,28 @@ from mplslide import new_slide, slide_heading
 CODE = dict(verticalalignment='top', fontsize=40, fontfamily='monospace')
 
 
+def formatter():
+    fig = new_slide()
+
+    slide_heading(fig, '3.3 Feature: simplified tick formatters')
+
+    fig.text(0.05, 0.8, """\
+ax.xaxis.set_major_formatter(
+    StrMethodFormatter('{x} km'))
+\N{Rightwards Double Arrow} ax.xaxis.set_major_formatter('{x} km')
+    """, **CODE)
+
+    fig.text(0.05, 0.5, """\
+def fmt(x, pos):
+    return f'{x} km'
+
+ax.xaxis.set_major_formatter(FuncFormatter(fmt))
+\N{Rightwards Double Arrow} ax.xaxis.set_major_formatter(fmt)
+    """, **CODE)
+
+    return fig
+
+
 def axline():
     fig = new_slide()
 
@@ -98,6 +120,7 @@ axd['histy'].sharey(axd['scat'])""", **CODE)
 
 def slides():
     return (
+        formatter(),
         axline(),
         *mosaic(),
         sharing(),

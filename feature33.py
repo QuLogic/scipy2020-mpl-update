@@ -53,11 +53,11 @@ def mosaic():
 
         fig.text(0.05, 0.8, f'plt.figure().subplot_mosaic({text})', **CODE)
 
-        ax_dict = fig.subplot_mosaic(eval(text.lstrip()))
+        ax_dict = fig.subplot_mosaic(eval(text.lstrip()),
+                                     # Don't overlay title and code.
+                                     gridspec_kw=dict(left=0.3, top=0.7,
+                                                      right=0.97))
         identify_axes(ax_dict)
-
-        # Re-arrange to not overlay title and code.
-        fig.subplots_adjust(left=0.4, top=0.7, right=0.97)
 
         yield fig
 

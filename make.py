@@ -15,6 +15,10 @@ from feature33 import slides as feature33_slides
 from plan import slides as plan_slides
 
 
+METADATA = {
+    'Author': 'Elliott Sales de Andrade',
+    'Title': 'Matplotlib Project Update for SciPy 2020',
+}
 MPL_PATH = sys.argv[1]
 PAGES = [
     (title_slides, ),
@@ -25,7 +29,7 @@ PAGES = [
     (plan_slides, ),
 ]
 
-with PdfPages('slides.pdf') as pdf:
+with PdfPages('slides.pdf', metadata=METADATA) as pdf:
     for page, *args in PAGES:
         figs = page(*args)
         if not isinstance(figs, (tuple, list)):

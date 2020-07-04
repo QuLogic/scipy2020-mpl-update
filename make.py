@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import subprocess
 import sys
 
 from matplotlib.backends.backend_pdf import PdfPages
@@ -39,3 +40,6 @@ with PdfPages('slides.pdf', metadata=METADATA) as pdf:
                 create_icon_axes(fig, (0.825, 0.825, 0.2, 0.15),
                                  0.3, 0.3, 0.3, [5])
             pdf.savefig(fig)
+
+subprocess.run(['qpdf', 'slides.pdf', '--object-streams=generate',
+                '--linearize', 'scipy2020-mpl-update.pdf'])

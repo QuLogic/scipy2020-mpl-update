@@ -105,7 +105,7 @@ def mosaic():
 
 def sharing():
     """
-    Create slide for feature highlight of post-hox Axes sharing.
+    Create slide for feature highlight of post-hoc Axes sharing.
     """
 
     fig = new_slide()

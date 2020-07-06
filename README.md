@@ -11,10 +11,11 @@ Requirements
 * NumPy
 * Matplotlib >= 3.3.0rc1
 * A git checkout of the `matplotlib` source code, to produce the timeline.
-* The title fonts, currently Carlito to match the Matplotlib logo.
+* The Carlito font.
 
 Optionally, you may also make available:
 
+* The font to match the Matplotlib logo, Calibri.
 * [`qpdf`](http://qpdf.sourceforge.net/), to linearize the final PDF.
 * Matplotlib built and installed from [this Pull
   Request](https://github.com/matplotlib/matplotlib/pull/17832), so that the
@@ -37,8 +38,9 @@ Overview
 --------
 
 Some general setup is contained in `mplslide.py`, namely setting slide size,
-picking the font Carlito, and headings and other shortcut functions. Other
-styling is mostly consistent, but usually set in the individual files.
+picking the font (Calibri and Carlito), and headings and other shortcut
+functions. Other styling is mostly consistent, but usually set in the
+individual files.
 
 All slides are produced in the remaining Python files:
 

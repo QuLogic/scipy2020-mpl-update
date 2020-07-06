@@ -13,7 +13,7 @@ from matplotlib.textpath import TextPath
 import matplotlib.transforms as mtrans
 
 
-from mplslide import MPL_BLUE, FONT, new_slide
+from mplslide import MPL_BLUE, LOGO_FONT, FONT, new_slide
 
 
 def create_icon_axes(fig, ax_position, lw_bars, lw_grid, lw_border, rgrid):
@@ -77,7 +77,7 @@ def create_text_axes(fig, height_px):
     ax.set_aspect("equal")
     ax.set_axis_off()
 
-    path = TextPath((0, 0), "matplotlib", size=height_px * 0.8, prop=FONT)
+    path = TextPath((0, 0), "matplotlib", size=height_px * 0.8, prop=LOGO_FONT)
 
     angle = 4.25  # degrees
     trans = mtrans.Affine2D().skew_deg(angle, 0)

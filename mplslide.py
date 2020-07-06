@@ -10,6 +10,8 @@ import matplotlib.font_manager
 
 #: The blue used for Matplotlib logo.
 MPL_BLUE = '#11557c'
+#: The font to use for the Matplotlib logo.
+LOGO_FONT = None
 #: A bullet point.
 BULLET = '$\N{Bullet}$'
 #: The FontProperties to use, Carlito.
@@ -25,16 +27,37 @@ def check_requirements():
     Check requirements to create the slides.
 
     Currently checks whether the path to a Matplotlib repository is specified,
-    and that the Carlito font is available.
+    and that the Carlito and/or Calibri fonts are available.
     """
 
     if len(sys.argv) < 2:
         sys.exit('Usage: %s <matplotlib-path>' % (sys.argv[0], ))
-    if 'Carlito' not in matplotlib.font_manager.findfont('Carlito:bold'):
-        sys.exit('Carlito font must be installed.')
-    global FONT
-    FONT = matplotlib.font_manager.FontProperties(family='Carlito',
-                                                  weight='bold')
+    # The original font is Calibri, if that is not installed, we fall back
+    # to Carlito, which is metrically equivalent.
+    calibri = carlito = None
+    if 'Calibri' in matplotlib.font_manager.findfont('Calibri:bold'):
+        calibri = matplotlib.font_manager.FontProperties(family='Calibri',
+                                                         weight='bold')
+    if 'Carlito' in matplotlib.font_manager.findfont('Carlito:bold'):
+        carlito = matplotlib.font_manager.FontProperties(family='Carlito',
+                                                         weight='bold')
+    global FONT, LOGO_FONT
+    if calibri is not None:
+        LOGO_FONT = calibri
+        if carlito is None:
+            FONT = calibri
+            print('WARNING: Using Calibri for all text. '
+                  'Non-logo text may not appear correct.')
+        else:
+            FONT = carlito
+            print('Using Calibri for logo and Carlito for remaining text.')
+    elif carlito is not None:
+        print('WARNING: Using Carlito for all text. '
+              'The logo may not appear correct.')
+        LOGO_FONT = carlito
+        FONT = carlito
+    else:
+        sys.exit('Calibri or Carlito font must be installed.')
 
 
 def new_slide(plain=False):

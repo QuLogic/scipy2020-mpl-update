@@ -6,7 +6,7 @@ Generate slides for the presentation.
 Usage: ./make.py /path/to/matplotlib/checkout
 
 You must make a clone of the Matplotlib git repository available, and should
-have the Carlito font installed.
+have the Carlito and/or Calibri font installed.
 """
 
 import shutil

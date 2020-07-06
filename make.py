@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import shutil
 import subprocess
 import sys
 
@@ -41,5 +42,8 @@ with PdfPages('slides.pdf', metadata=METADATA) as pdf:
                                  0.3, 0.3, 0.3, [5])
             pdf.savefig(fig)
 
-subprocess.run(['qpdf', 'slides.pdf', '--object-streams=generate',
-                '--linearize', 'scipy2020-mpl-update.pdf'])
+if shutil.which('qpdf') is not None:
+    subprocess.run(['qpdf', 'slides.pdf', '--object-streams=generate',
+                    '--linearize', 'scipy2020-mpl-update.pdf'])
+else:
+    shutil.copy('slides.pdf', 'scipy2020-mpl-update.pdf')

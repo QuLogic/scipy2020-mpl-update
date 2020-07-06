@@ -1,5 +1,14 @@
 #!/usr/bin/env python3
 
+"""
+Generate slides for the presentation.
+
+Usage: ./make.py /path/to/matplotlib/checkout
+
+You must make a clone of the Matplotlib git repository available, and should
+have the Carlito font installed.
+"""
+
 import shutil
 import subprocess
 import sys
@@ -7,6 +16,7 @@ import sys
 from matplotlib.backends.backend_pdf import PdfPages
 
 from mplslide import check_requirements
+# This must be called before importing other files to make the font available.
 check_requirements()  # noqa: F402
 
 from title import create_icon_axes, slides as title_slides
@@ -23,6 +33,7 @@ METADATA = {
 }
 MPL_PATH = sys.argv[1]
 PAGES = [
+    # Tuple of function + any arguments.
     (title_slides, ),
     (news_slides, ),
     (history_slides, MPL_PATH, ),
@@ -42,6 +53,7 @@ with PdfPages('slides.pdf', metadata=METADATA) as pdf:
                                  0.3, 0.3, 0.3, [5])
             pdf.savefig(fig)
 
+# Linearize the PDF if qpdf is available.
 if shutil.which('qpdf') is not None:
     subprocess.run(['qpdf', 'slides.pdf', '--object-streams=generate',
                     '--linearize', 'scipy2020-mpl-update.pdf'])

@@ -1,7 +1,14 @@
+"""
+Future plans.
+"""
+
 from mplslide import BULLET, FONT, new_slide, slide_heading
 
 
 def slides():
+    """
+    Create slide for future plans.
+    """
     fig = new_slide()
 
     slide_heading(fig, 'Future Plans')

@@ -1,3 +1,10 @@
+"""
+The title page.
+
+Also creates an inset Axes that plots the logo for the corner of a slide. This
+file is based on `examples/misc/logos2.py` in the Matplotlib repository.
+"""
+
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
@@ -82,6 +89,9 @@ def create_text_axes(fig, height_px):
 
 
 def slides():
+    """
+    Create the title slide.
+    """
     fig = new_slide(plain=True)
 
     create_text_axes(fig, 110)

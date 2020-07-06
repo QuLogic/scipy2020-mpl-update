@@ -1,3 +1,7 @@
+"""
+Feature highlights for Matplotlib 3.2.0.
+"""
+
 import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
 import numpy as np
@@ -5,7 +9,11 @@ import numpy as np
 from mplslide import new_slide, slide_heading
 
 
-def feature32_overview():
+def feature32_bar3d():
+    """
+    Create slide for feature highlight of bar3d light source.
+    """
+
     fig = new_slide()
 
     slide_heading(fig, '3.2 Feature: bar3d light source')
@@ -36,6 +44,9 @@ def feature32_overview():
 
 
 def slides():
+    """
+    Return slides for this section.
+    """
     return (
-        feature32_overview(),
+        feature32_bar3d(),
     )

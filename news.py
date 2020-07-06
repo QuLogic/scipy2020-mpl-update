@@ -1,21 +1,54 @@
+"""
+General news.
+"""
+
 from functools import partial
 
 from mplslide import BULLET, FONT, new_slide, slide_heading
 
 
 def bullet_level1(fig, y, text):
+    """
+    Create a level 1 list item.
+
+    Parameters
+    ----------
+    fig : matplotlib.figure.Figure
+        A slide figure.
+    y : float
+        The vertical position for the list item, in 0-1 figure space.
+    text : str
+        The text to place in the list item.
+    """
     return fig.text(0.05, y, text,
                     fontproperties=FONT, fontsize=48, alpha=0.7,
                     verticalalignment='top')
 
 
 def bullet_level2(fig, y, text):
+    """
+    Create a level 2 list item.
+
+    This is roughly the same as level 1, but not bolded, and indented more.
+
+    Parameters
+    ----------
+    fig : matplotlib.figure.Figure
+        A slide figure.
+    y : float
+        The vertical position for the list item, in 0-1 figure space.
+    text : str
+        The text to place in the list item.
+    """
     return fig.text(0.1, y, text,
                     fontproperties=FONT, fontsize=48, fontweight='normal',
                     alpha=0.7, verticalalignment='top')
 
 
 def slides():
+    """
+    Create slide for general news.
+    """
     fig = new_slide()
 
     slide_heading(fig, 'General News')

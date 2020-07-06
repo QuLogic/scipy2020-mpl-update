@@ -1,3 +1,7 @@
+"""
+Feature highlights for Matplotlib 3.3.0.
+"""
+
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -8,6 +12,10 @@ CODE = dict(verticalalignment='top', fontsize=40, fontfamily='monospace')
 
 
 def formatter():
+    """
+    Create slide for feature highlight of simplified tick formatters.
+    """
+
     fig = new_slide()
 
     slide_heading(fig, '3.3 Feature: simplified tick formatters')
@@ -30,6 +38,10 @@ ax.xaxis.set_major_formatter(FuncFormatter(fmt))
 
 
 def axline():
+    """
+    Create slide for feature highlight of axline.
+    """
+
     fig = new_slide()
 
     slide_heading(fig, '3.3 Feature: axline for infinite lines')
@@ -57,6 +69,10 @@ def identify_axes(ax_dict):
 
 
 def mosaic():
+    """
+    Create slide for feature highlight of subplot_mosaic.
+    """
+
     example1 = """
     '''
     A.C
@@ -85,6 +101,10 @@ def mosaic():
 
 
 def sharing():
+    """
+    Create slide for feature highlight of post-hox Axes sharing.
+    """
+
     fig = new_slide()
 
     slide_heading(fig, '3.3 Feature: post-hoc Axes sharing')
@@ -119,6 +139,9 @@ axd['histy'].sharey(axd['scat'])""", **CODE)
 
 
 def slides():
+    """
+    Return slides for this section.
+    """
     return (
         formatter(),
         axline(),

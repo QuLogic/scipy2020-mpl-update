@@ -1,3 +1,10 @@
+"""
+A timeline of releases.
+
+This file is based on `examples/lines_bars_and_markers/timeline.py` in the
+Matplotlib repository.
+"""
+
 from datetime import datetime
 import subprocess
 
@@ -9,6 +16,14 @@ from mplslide import new_slide, slide_heading
 
 
 def slides(mpl_path):
+    """
+    Create slide for release history.
+
+    Parameters
+    ----------
+    mpl_path : str or pathlib.Path
+        Path to the Matplotlib checkout used to find release tags and dates.
+    """
     fig = new_slide()
 
     slide_heading(fig, 'Release History')

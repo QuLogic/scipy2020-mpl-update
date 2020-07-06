@@ -96,8 +96,8 @@ def mosaic():
 
         ax_dict = fig.subplot_mosaic(eval(text.lstrip()),
                                      # Don't overlay title and code.
-                                     gridspec_kw=dict(left=0.3, top=0.7,
-                                                      right=0.97))
+                                     gridspec_kw={'left': 0.3, 'top': 0.7,
+                                                  'right': 0.97})
         identify_axes(ax_dict)
 
         yield fig
@@ -125,6 +125,7 @@ axd['histy'].sharey(axd['scat'])""", **CODE)
         axd = fig.subplot_mosaic([['.', 'histx'], ['histy', 'scat']],
                                  gridspec_kw={'width_ratios': [1, 7],
                                               'height_ratios': [2, 7],
+                                              # Don't overlay title and code.
                                               'top': 0.65})
 
         im = axd['scat'].scatter(x, y, c=c, cmap='RdBu', picker=True)

@@ -129,8 +129,16 @@ axd['histy'].sharey(axd['scat'])""", **CODE)
                                               'top': 0.65})
 
         im = axd['scat'].scatter(x, y, c=c, cmap='RdBu', picker=True)
-        fig.colorbar(im, ax=[axd['scat'], axd['histy']],
-                     orientation='horizontal')
+        fig.colorbar(im, orientation='horizontal',
+                     # Semantically, the colorbar isn't really related to
+                     # 'histy', but since we can't use constrained layout in
+                     # the slides, we add it anyway to make things shrink
+                     # correctly.
+                     ax=[axd['scat'], axd['histy']],
+                     # Since we're stealing space from the 'histy' Axes as
+                     # well, re-jigger the size and anchoring so that it only
+                     # appears under the 'scat' Axes.
+                     shrink=0.8, anchor=(1, 1), panchor=(1, 0), aspect=50)
 
         _, _, patchesx = axd['histx'].hist(x)
         _, _, patchesy = axd['histy'].hist(y, orientation='horizontal')

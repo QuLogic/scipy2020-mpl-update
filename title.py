@@ -64,7 +64,7 @@ def create_icon_axes(fig, ax_position, lw_bars, lw_grid, lw_border, rgrid):
         ax.set_rmax(9)
         ax.set_yticks(rgrid)
 
-        # the actual visible background - extends a bit beyond the axis
+        # The actual visible background - extends a bit beyond the axis
         ax.add_patch(Rectangle((0, 0), arc, 9.58,
                                facecolor='white', zorder=0,
                                clip_on=False, in_layout=False))

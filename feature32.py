@@ -18,7 +18,10 @@ def feature32_bar3d():
 
     slide_heading(fig, '3.2 Feature: bar3d light source')
 
+    # Plot two different light source angles.
     for i, angle in [(1, 90), (2, 0)]:
+        # This example comes from the Pull Request adding this support:
+        # https://github.com/matplotlib/matplotlib/pull/15099#issuecomment-523981989
         ax = fig.add_subplot(1, 2, i, projection="3d")
 
         ls = mcolors.LightSource(azdeg=45, altdeg=angle)

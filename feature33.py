@@ -63,6 +63,9 @@ ax.axline((0.1, 0.2), (0.8, 0.7), color='C3')
 
 
 def identify_axes(ax_dict):
+    """
+    Mark Axes using their name passed to ``subplot_mosaic``.
+    """
     kw = dict(ha='center', va='center', fontsize=48, color='darkgrey')
     for k, ax in ax_dict.items():
         ax.text(0.5, 0.5, k, transform=ax.transAxes, **kw)

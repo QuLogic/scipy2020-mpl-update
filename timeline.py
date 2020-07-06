@@ -48,7 +48,7 @@ def slides(mpl_path):
     ax.plot(dates, np.zeros_like(dates), "-o",
             color="k", markerfacecolor="w", linewidth=3, markersize=10)
 
-    # annotate lines
+    # Annotate lines.
     for d, l, r in zip(dates, levels, names):
         ax.annotate(r, xy=(d, l),
                     xytext=(-3, np.sign(l)*3), textcoords="offset points",
@@ -56,12 +56,12 @@ def slides(mpl_path):
                     verticalalignment="bottom" if l > 0 else "top",
                     fontsize=24)
 
-    # format xaxis with 4 month intervals
+    # Format xaxis with 4 month intervals.
     ax.get_xaxis().set_major_locator(mdates.MonthLocator(interval=4))
     ax.get_xaxis().set_major_formatter(mdates.DateFormatter("%b %Y"))
     plt.setp(ax.get_xticklabels(), rotation=30, ha="right", fontsize=24)
 
-    # remove y axis and spines
+    # Remove y axis and spines.
     ax.get_yaxis().set_visible(False)
     for spine in ["left", "top", "right"]:
         ax.spines[spine].set_visible(False)

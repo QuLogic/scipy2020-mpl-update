@@ -26,6 +26,7 @@ from feature32 import slides as feature32_slides
 from feature33 import slides as feature33_slides
 from docs import slides as docs_slides
 from plan import slides as plan_slides
+from end import slides as end_slides
 
 
 METADATA = {
@@ -42,6 +43,7 @@ PAGES = [
     (feature33_slides, ),
     (docs_slides, ),
     (plan_slides, ),
+    (end_slides, ),
 ]
 
 with PdfPages('slides.pdf', metadata=METADATA) as pdf:

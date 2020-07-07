@@ -37,7 +37,7 @@ def feature32_bar3d():
         y = y.ravel()
         dz = x + y
 
-        color = np.array([cmap(norm(i)) for i in range(area)])
+        color = cmap(norm(np.arange(area)))
 
         ax.bar3d(x=x, y=y, z=0,
                  dx=1, dy=1, dz=dz,

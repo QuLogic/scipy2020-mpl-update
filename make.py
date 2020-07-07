@@ -24,6 +24,7 @@ from news import slides as news_slides
 from timeline import slides as history_slides
 from feature32 import slides as feature32_slides
 from feature33 import slides as feature33_slides
+from docs import slides as docs_slides
 from plan import slides as plan_slides
 
 
@@ -39,6 +40,7 @@ PAGES = [
     (history_slides, MPL_PATH, ),
     (feature32_slides, ),
     (feature33_slides, ),
+    (docs_slides, ),
     (plan_slides, ),
 ]
 

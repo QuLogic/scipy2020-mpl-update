@@ -13,10 +13,10 @@ def slides():
 
     slide_heading(fig, 'Thank You!')
 
-    props = dict(fontproperties=FONT, fontsize=56, color='C0',
+    props = dict(fontproperties=FONT, fontsize=56, alpha=0.7,
                  horizontalalignment='center')
 
-    fig.text(0.5, 0.5, 'This entire presentation was made in Matplotlib.',
+    fig.text(0.5, 0.5, 'This entire presentation was made in Matplotlib:',
              **props)
 
     t = fig.text(0.5, 0.4, '\nhttps://github.com/QuLogic/scipy2020-mpl-update',

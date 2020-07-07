@@ -8,7 +8,8 @@ import matplotlib.pyplot as plt
 from mplslide import new_slide, slide_heading, annotate_pr_author
 
 
-CODE = dict(verticalalignment='top', fontsize=40, fontfamily='monospace')
+CODE = dict(fontfamily='monospace', fontsize=40, verticalalignment='top',
+            alpha=0.7)
 
 
 def formatter():

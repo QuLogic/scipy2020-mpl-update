@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
 import numpy as np
 
-from mplslide import new_slide, slide_heading
+from mplslide import new_slide, slide_heading, annotate_pr_author
 
 
 def feature32_bar3d():
@@ -42,6 +42,8 @@ def feature32_bar3d():
         ax.bar3d(x=x, y=y, z=0,
                  dx=1, dy=1, dz=dz,
                  color=color, shade=True, lightsource=ls)
+
+    annotate_pr_author(fig, 'fourpoints', pr=15099)
 
     return fig
 

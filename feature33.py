@@ -5,7 +5,7 @@ Feature highlights for Matplotlib 3.3.0.
 import numpy as np
 import matplotlib.pyplot as plt
 
-from mplslide import new_slide, slide_heading
+from mplslide import new_slide, slide_heading, annotate_pr_author
 
 
 CODE = dict(verticalalignment='top', fontsize=40, fontfamily='monospace')
@@ -34,6 +34,8 @@ ax.xaxis.set_major_formatter(FuncFormatter(fmt))
 \N{Rightwards Double Arrow} ax.xaxis.set_major_formatter(fmt)
     """, **CODE)
 
+    annotate_pr_author(fig, 'toddrjen', pr=16715)
+
     return fig
 
 
@@ -58,6 +60,9 @@ ax.axline((0.1, 0.2), (0.8, 0.7), color='C3')
     ax.axline((0.1, 0.2), (0.8, 0.7), color='C3', lw=3, label='by points')
 
     ax.legend()
+
+    annotate_pr_author(fig, 'QuLogic', 'dstansby', 'anntzer', 'timhoffm',
+                       pr=15330)
 
     return fig
 
@@ -99,6 +104,8 @@ def mosaic():
                                      gridspec_kw={'left': 0.3, 'top': 0.7,
                                                   'right': 0.97})
         identify_axes(ax_dict)
+
+        annotate_pr_author(fig, 'tacaswell', pr=16603)
 
         yield fig
 
@@ -146,6 +153,8 @@ axd['histy'].sharey(axd['scat'])""", **CODE)
     axd['histy'].invert_xaxis()
     axd['histx'].sharex(axd['scat'])
     axd['histy'].sharey(axd['scat'])
+
+    annotate_pr_author(fig, 'anntzer', pr=15287)
 
     return fig
 

@@ -88,3 +88,25 @@ def slide_heading(fig, text):
     """
 
     fig.text(0.05, 0.85, text, color='C0', fontproperties=FONT, fontsize=72)
+
+
+def annotate_pr_author(fig, *authors, pr=None):
+    """
+    Annotate the Pull Request author(s) on the bottom-right corner of a slide.
+
+    Parameters
+    ----------
+    fig : matplotlib.figure.Figure
+        The slide figure.
+    authors : list of str
+        The GitHub usernames to use for the annotation.
+    pr : int, optional
+        The PR number on GitHub to link to.
+    """
+
+    text = 'PR by ' + ', '.join(f'@{author}' for author in authors)
+    t = fig.text(0.95, 0.05, text,
+                 fontproperties=FONT, fontsize=32, alpha=0.7,
+                 horizontalalignment='right')
+    if pr is not None:
+        t.set_url(f'https://github.com/matplotlib/matplotlib/pull/{pr}')

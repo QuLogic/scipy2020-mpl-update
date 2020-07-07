@@ -23,7 +23,7 @@ def docs():
                  **props)
     t.set_url('https://matplotlib.org/3.3.0/users/whats_new.html')
 
-    fig.text(0.05, 0.3, 'Cheatsheets!', **props)
+    fig.text(0.05, 0.3, 'Cheatsheets! By @rougier', **props)
     t = fig.text(0.1, 0.3, '\nhttps://github.com/matplotlib/cheatsheets/',
                  **props)
     t.set_url('https://github.com/matplotlib/cheatsheets/')

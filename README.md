@@ -4,6 +4,9 @@ Matplotlib Project Update for SciPy 2020
 This repository contains code to create the presentation for the Matplotlib
 project update at SciPy 2020.
 
+If you want to view the resulting PDF directly, you can [find a generated copy
+in the release](https://github.com/QuLogic/scipy2020-mpl-update/releases).
+
 Requirements
 ------------
 
